@@ -1,40 +1,78 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/pastel_green"
     android:padding="16dp">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
+        <!-- Ảnh món ăn -->
         <ImageView
             android:id="@+id/imgDetail"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"/>
+            android:layout_height="220dp"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp" />
 
+        <!-- Tên món ăn -->
         <TextView
             android:id="@+id/tvMealTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_marginTop="12dp"/>
+            android:textColor="@color/black"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Nguyên liệu -->
+        <TextView
+            android:id="@+id/tvIngredientsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nguyên liệu:"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/tvIngredientsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Hướng dẫn -->
+        <TextView
+            android:id="@+id/tvInstructionsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hướng dẫn nấu:"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="6dp" />
 
         <TextView
             android:id="@+id/tvInstructions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"/>
+            android:textColor="@color/black"
+            android:layout_marginBottom="16dp" />
 
-        <Button
+        <!-- Nút yêu thích -->
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnFavorite"
+            style="@style/Widget.Material3.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Thêm vào Yêu thích"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="@color/purple_500"
-            android:textColor="@color/white"/>
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/pastel_green_dark"
+            android:textColor="@color/black" />
     </LinearLayout>
 </ScrollView>

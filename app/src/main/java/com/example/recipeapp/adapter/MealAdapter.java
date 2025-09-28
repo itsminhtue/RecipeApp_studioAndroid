@@ -31,17 +31,31 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
     @Override
     public void onBindViewHolder(@NonNull MealViewHolder holder, int position) {
         Meal meal = mealList.get(position);
+
+        // Set text
         holder.tvMealName.setText(meal.getStrMeal());
-        Glide.with(context).load(meal.getStrMealThumb()).into(holder.imgMeal);
+
+        // Load ảnh bằng Glide
+        Glide.with(context)
+                .load(meal.getStrMealThumb())
+                .placeholder(R.drawable.ic_placeholder) // ảnh mặc định khi chờ load
+                .error(R.drawable.ic_error)       // ảnh nếu load lỗi
+                .into(holder.imgMeal);
+
+        // Khi click thì mở DetailActivity và gửi đủ dữ liệu
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
             intent.putExtra("meal_id", meal.getIdMeal());
+            intent.putExtra("meal_name", meal.getStrMeal());
+            intent.putExtra("meal_thumb", meal.getStrMealThumb());
             context.startActivity(intent);
         });
     }
 
     @Override
-    public int getItemCount() { return mealList.size(); }
+    public int getItemCount() {
+        return mealList.size();
+    }
 
     static class MealViewHolder extends RecyclerView.ViewHolder {
         TextView tvMealName;

@@ -38,9 +38,18 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.FavVie
     public void onBindViewHolder(@NonNull FavViewHolder holder, int position) {
         FavoriteItem item = list.get(position);
         holder.tvName.setText(item.name);
-        Glide.with(context).load(item.thumb).into(holder.imgThumb);
 
-        // Click để mở lại DetailActivity
+        if (item.thumb != null && !item.thumb.isEmpty()) {
+            Glide.with(context)
+                    .load(item.thumb)
+                    .placeholder(R.drawable.ic_placeholder) // ảnh mặc định
+                    .error(R.drawable.ic_error)       // nếu lỗi load
+                    .into(holder.imgThumb);
+        } else {
+            holder.imgThumb.setImageResource(R.drawable.ic_placeholder);
+        }
+
+        // Click mở DetailActivity
         holder.itemView.setOnClickListener(v -> {
             Intent i = new Intent(context, DetailActivity.class);
             i.putExtra("meal_id", item.id);

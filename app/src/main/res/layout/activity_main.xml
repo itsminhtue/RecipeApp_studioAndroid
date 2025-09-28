@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/pastel_green"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,22 +9,28 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/purple_500"
+        android:background="@color/pastel_green_dark"
         app:title="Recipe App"
-        app:titleTextColor="@android:color/white" />
+        app:titleTextColor="@color/black"
+        app:navigationIcon="@drawable/ic_baseline_menu_24" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnFavorites"
+        style="@style/Widget.Material3.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Danh sách yêu thích"
-        android:layout_marginBottom="8dp"/>
+        android:layout_margin="12dp"
+        android:textColor="@color/black"
+        app:cornerRadius="12dp"
+        app:backgroundTint="@color/pastel_green_dark" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMeals"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp"/>
-
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp"
+        android:clipToPadding="false" />
 
 </LinearLayout>

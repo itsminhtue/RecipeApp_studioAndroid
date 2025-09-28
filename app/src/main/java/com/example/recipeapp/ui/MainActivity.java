@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 import com.example.recipeapp.R;
 import com.example.recipeapp.adapter.MealAdapter;
@@ -36,12 +37,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    Log.d("DEBUG_API", "Meals: " + response.body().getMeals());
                     binding.rvMeals.setAdapter(
-                            new MealAdapter(MainActivity.this, response.body().getMeals()));
+                            new MealAdapter(MainActivity.this, response.body().getMeals())
+                    );
+                } else {
+                    Log.d("DEBUG_API", "Response not successful or body null");
                 }
             }
 
-            @Override
+        @Override
             public void onFailure(Call<MealResponse> call, Throwable t) {
                 Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
