@@ -5,8 +5,7 @@ public class MealDetail {
     private String strInstructions;
     private String strMealThumb;
 
-    // Ingredients (1..20)
-    private String strIngredient1;
+        private String strIngredient1;
     private String strIngredient2;
     private String strIngredient3;
     private String strIngredient4;
@@ -27,8 +26,7 @@ public class MealDetail {
     private String strIngredient19;
     private String strIngredient20;
 
-    // Measures (1..20)
-    private String strMeasure1;
+        private String strMeasure1;
     private String strMeasure2;
     private String strMeasure3;
     private String strMeasure4;
@@ -49,13 +47,11 @@ public class MealDetail {
     private String strMeasure19;
     private String strMeasure20;
 
-    // Getter chính
-    public String getStrMeal() { return strMeal; }
+        public String getStrMeal() { return strMeal; }
     public String getStrInstructions() { return strInstructions; }
     public String getStrMealThumb() { return strMealThumb; }
 
-    // Lấy nguyên liệu + định lượng thành danh sách gọn gàng
-    public String[] getIngredientsList() {
+        public String[] getIngredientsList() {
         String[] ingredients = new String[20];
         String[] ingr = {
                 strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5,

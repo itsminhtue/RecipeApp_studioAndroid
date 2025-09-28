@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:text="Tên món"
             android:paddingTop="8dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="18sp"
             android:gravity="center_horizontal"/>

@@ -29,18 +29,15 @@ public class DetailActivity extends AppCompatActivity {
         binding = ActivityDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Nhận dữ liệu từ Intent
         mealId = getIntent().getStringExtra("meal_id");
         mealName = getIntent().getStringExtra("meal_name");
         mealThumb = getIntent().getStringExtra("meal_thumb");
 
-        // Load chi tiết món ăn từ API
-        if (mealId != null) {
+                if (mealId != null) {
             loadMealDetail(mealId);
         }
 
-        // Xử lý Yêu thích
-        favoriteDao = new FavoriteDao(this);
+                favoriteDao = new FavoriteDao(this);
         isFavorite = favoriteDao.isFavorite(mealId);
         updateFavoriteButton();
 
@@ -64,8 +61,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MealDetailResponse> call, Response<MealDetailResponse> response) {
                 if (isFinishing() || isDestroyed()) {
-                    return; // Activity đã đóng, không làm gì nữa
-                }
+                    return;                 }
 
                 if (response.isSuccessful() && response.body() != null && !response.body().getMeals().isEmpty()) {
                     MealDetail meal = response.body().getMeals().get(0);
@@ -76,15 +72,13 @@ public class DetailActivity extends AppCompatActivity {
                     binding.tvMealTitle.setText(meal.getStrMeal());
                     binding.tvInstructions.setText(meal.getStrInstructions());
 
-                    // Hiển thị danh sách nguyên liệu
-                    StringBuilder ingBuilder = new StringBuilder();
+                                        StringBuilder ingBuilder = new StringBuilder();
                     for (String ing : meal.getIngredientsList()) {
                         ingBuilder.append("• ").append(ing).append("\n");
                     }
                     binding.tvIngredientsList.setText(ingBuilder.toString());
 
-                    // Load ảnh an toàn
-                    if (!isFinishing() && !isDestroyed()) {
+                                        if (!isFinishing() && !isDestroyed()) {
                         Glide.with(DetailActivity.this)
                                 .load(meal.getStrMealThumb())
                                 .placeholder(R.drawable.ic_placeholder)

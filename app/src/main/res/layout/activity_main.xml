@@ -14,6 +14,15 @@
         app:titleTextColor="@color/black"
         app:navigationIcon="@drawable/ic_baseline_menu_24" />
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Tìm món ăn..."
+        android:iconifiedByDefault="false"
+        android:layout_margin="12dp"
+        android:background="@drawable/bg_searchview" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnFavorites"
         style="@style/Widget.Material3.Button"
@@ -25,6 +34,13 @@
         app:cornerRadius="12dp"
         app:backgroundTint="@color/pastel_green_dark" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMeals"
         android:layout_width="match_parent"
@@ -32,5 +48,7 @@
         android:layout_weight="1"
         android:padding="8dp"
         android:clipToPadding="false" />
+
+
 
 </LinearLayout>

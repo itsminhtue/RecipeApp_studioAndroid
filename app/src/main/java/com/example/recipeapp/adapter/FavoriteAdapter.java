@@ -42,15 +42,12 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.FavVie
         if (item.thumb != null && !item.thumb.isEmpty()) {
             Glide.with(context)
                     .load(item.thumb)
-                    .placeholder(R.drawable.ic_placeholder) // ảnh mặc định
-                    .error(R.drawable.ic_error)       // nếu lỗi load
-                    .into(holder.imgThumb);
+                    .placeholder(R.drawable.ic_placeholder)                     .error(R.drawable.ic_error)                           .into(holder.imgThumb);
         } else {
             holder.imgThumb.setImageResource(R.drawable.ic_placeholder);
         }
 
-        // Click mở DetailActivity
-        holder.itemView.setOnClickListener(v -> {
+                holder.itemView.setOnClickListener(v -> {
             Intent i = new Intent(context, DetailActivity.class);
             i.putExtra("meal_id", item.id);
             i.putExtra("meal_name", item.name);

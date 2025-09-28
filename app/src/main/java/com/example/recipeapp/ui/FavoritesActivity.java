@@ -33,8 +33,7 @@ public class FavoritesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Refresh khi quay lại từ DetailActivity
-        List<FavoriteItem> list = favoriteDao.getAllFavorites();
+                List<FavoriteItem> list = favoriteDao.getAllFavorites();
         binding.rvFavorites.setAdapter(new FavoriteAdapter(this, list));
     }
 }

@@ -2,23 +2,36 @@ package com.example.recipeapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.*;
-import android.widget.*;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.recipeapp.R;
 import com.example.recipeapp.model.Meal;
 import com.example.recipeapp.ui.DetailActivity;
+import com.example.recipeapp.utils.MealDiffCallback;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder> {
-    private Context context;
-    private List<Meal> mealList;
+
+    private final Context context;
+    private List<Meal> mealList = new ArrayList<>();
 
     public MealAdapter(Context context, List<Meal> mealList) {
         this.context = context;
-        this.mealList = mealList;
+        if (mealList != null) {
+            this.mealList.addAll(mealList);
+        }
     }
 
     @NonNull
@@ -32,17 +45,14 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
     public void onBindViewHolder(@NonNull MealViewHolder holder, int position) {
         Meal meal = mealList.get(position);
 
-        // Set text
         holder.tvMealName.setText(meal.getStrMeal());
 
-        // Load ảnh bằng Glide
-        Glide.with(context)
+        Glide.with(holder.itemView.getContext())
                 .load(meal.getStrMealThumb())
-                .placeholder(R.drawable.ic_placeholder) // ảnh mặc định khi chờ load
-                .error(R.drawable.ic_error)       // ảnh nếu load lỗi
+                .thumbnail(0.1f)                 .diskCacheStrategy(DiskCacheStrategy.ALL)                 .placeholder(R.drawable.ic_placeholder)
+                .error(R.drawable.ic_error)
                 .into(holder.imgMeal);
 
-        // Khi click thì mở DetailActivity và gửi đủ dữ liệu
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
             intent.putExtra("meal_id", meal.getIdMeal());
@@ -57,9 +67,22 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
         return mealList.size();
     }
 
+    /**
+     * Cập nhật danh sách bằng DiffUtil để mượt hơn
+     */
+    public void updateMeals(List<Meal> newList) {
+        if (newList == null) newList = new ArrayList<>();
+
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new MealDiffCallback(mealList, newList));
+        mealList.clear();
+        mealList.addAll(newList);
+        diffResult.dispatchUpdatesTo(this);
+    }
+
     static class MealViewHolder extends RecyclerView.ViewHolder {
         TextView tvMealName;
         ImageView imgMeal;
+
         MealViewHolder(View itemView) {
             super(itemView);
             tvMealName = itemView.findViewById(R.id.tvMealName);
